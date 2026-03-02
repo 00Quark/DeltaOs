@@ -1075,13 +1075,178 @@
     gap: 7px; flex-shrink: 0; min-width: 150px;
   }
 
+
+  /* ══ CALCULADORA ══ */
+  /* ══ CALCULADORA CIENTÍFICA ══ */
+  .calc-sci-wrap   { display:flex; flex-direction:column; width:100%; max-width:640px; margin:0 auto; gap:8px; }
+  .calc-display    { background:rgba(0,0,0,0.5); border:1px solid rgba(0,191,255,0.3); border-bottom:2px solid rgba(0,191,255,0.5); padding:12px 18px 10px; text-align:right; }
+  .calc-expr       { font-size:11px; color:var(--green-dim); letter-spacing:0.1em; min-height:16px; }
+  .calc-val        { font-family:'VT323',monospace; font-size:56px; color:var(--green); text-shadow:0 0 14px var(--green); line-height:1.1; word-break:break-all; }
+  .calc-mode-row   { display:flex; align-items:center; gap:8px; margin-top:6px; }
+  .calc-mode-btn   { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:0.2em; padding:2px 8px; border:1px solid rgba(0,191,255,0.2); color:rgba(0,191,255,0.35); cursor:pointer; transition:all 0.1s; background:transparent; }
+  .calc-mode-btn.active { border-color:var(--green); color:var(--green); background:rgba(0,191,255,0.08); }
+  .calc-sci-grid   { display:grid; grid-template-columns:repeat(5,1fr); gap:5px; }
+  .calc-basic-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:5px; }
+  .calc-divider    { height:1px; background:rgba(0,191,255,0.15); margin:2px 0; }
+  .calc-btn        { background:rgba(0,191,255,0.04); border:1px solid rgba(0,191,255,0.18); color:rgba(0,191,255,0.6); font-family:'Share Tech Mono',monospace; font-size:13px; padding:13px 4px; cursor:pointer; transition:all 0.1s; text-align:center; }
+  .calc-btn:hover  { background:rgba(0,191,255,0.13); color:var(--green); border-color:var(--green); text-shadow:0 0 6px var(--green); }
+  .calc-btn.sci    { font-size:11px; color:rgba(0,191,255,0.45); border-color:rgba(0,191,255,0.1); background:rgba(0,191,255,0.02); padding:12px 2px; }
+  .calc-btn.sci:hover { color:var(--green); border-color:rgba(0,191,255,0.4); background:rgba(0,191,255,0.09); }
+  .calc-btn.op     { color:var(--amber); border-color:rgba(255,176,0,0.25); }
+  .calc-btn.op:hover { background:rgba(255,176,0,0.1); border-color:var(--amber); color:var(--amber); text-shadow:0 0 6px var(--amber); }
+  .calc-btn.eq     { background:rgba(0,191,255,0.1); border-color:rgba(0,191,255,0.4); color:var(--green); font-size:18px; }
+  .calc-btn.eq:hover { background:rgba(0,191,255,0.22); box-shadow:0 0 12px rgba(0,191,255,0.25); }
+  .calc-btn.danger { color:var(--red); border-color:rgba(255,34,34,0.2); }
+  .calc-btn.danger:hover { background:rgba(255,34,34,0.08); border-color:var(--red); color:var(--red); text-shadow:none; }
+
+  /* ══ CALENDÁRIO ══ */
+  .cal-wrap { padding:16px 20px; display:flex; flex-direction:column; gap:12px; height:100%; }
+  .cal-nav  { display:flex; align-items:center; justify-content:space-between; }
+  .cal-month { font-family:'VT323',monospace; font-size:26px; color:var(--green); text-shadow:0 0 8px var(--green); letter-spacing:0.2em; }
+  .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+  .cal-dow  { text-align:center; font-size:9px; letter-spacing:0.15em; color:var(--green-dim); padding:4px 0; }
+  .cal-day  { text-align:center; padding:8px 4px; font-size:13px; color:rgba(0,191,255,0.5); border:1px solid transparent; cursor:pointer; transition:all 0.1s; min-height:38px; position:relative; }
+  .cal-day:hover { border-color:rgba(0,191,255,0.3); color:var(--green); background:rgba(0,191,255,0.06); }
+  .cal-day.today { border-color:var(--green); color:var(--green); text-shadow:0 0 6px var(--green); }
+  .cal-day.other-month { color:rgba(0,191,255,0.18); }
+  .cal-day.has-event::after { content:''; position:absolute; bottom:3px; left:50%; transform:translateX(-50%); width:4px; height:4px; background:var(--amber); border-radius:50%; }
+  .cal-day.selected { background:rgba(0,191,255,0.15); border-color:var(--green); color:var(--green); }
+  .cal-events { flex:1; overflow-y:auto; }
+  .cal-event-item { display:flex; align-items:center; gap:10px; padding:8px 10px; border:1px solid rgba(0,191,255,0.15); margin-bottom:6px; background:rgba(0,191,255,0.03); cursor:pointer; transition:all 0.1s; }
+  .cal-event-item:hover { border-color:rgba(0,191,255,0.35); background:rgba(0,191,255,0.07); }
+  .cal-event-dot { width:6px; height:6px; border-radius:50%; background:var(--amber); flex-shrink:0; }
+  .cal-event-dot.alert { background:var(--red); animation:blink 1s step-end infinite; }
+  .cal-event-time { font-size:11px; color:var(--green-dim); min-width:44px; }
+  .cal-event-name { font-size:13px; color:var(--green); flex:1; }
+  .cal-event-del  { font-size:14px; color:rgba(255,34,34,0.5); cursor:pointer; padding:0 4px; }
+  .cal-event-del:hover { color:var(--red); }
+  .cal-add-form { display:flex; gap:6px; flex-wrap:wrap; align-items:center; padding:10px 0; border-top:1px solid rgba(0,191,255,0.12); }
+  .cal-add-form input { background:rgba(0,191,255,0.04); border:1px solid rgba(0,191,255,0.2); color:var(--green); font-family:'Share Tech Mono',monospace; font-size:12px; padding:6px 10px; outline:none; }
+  .cal-add-form input:focus { border-color:var(--green); }
+
+  /* ══ LEMBRETES ══ */
+  .remind-wrap { padding:16px 20px; display:flex; flex-direction:column; gap:10px; height:100%; }
+  .remind-add  { display:flex; gap:8px; align-items:center; }
+  .remind-add input { flex:1; background:rgba(0,191,255,0.04); border:1px solid rgba(0,191,255,0.2); border-bottom-color:rgba(0,191,255,0.4); color:var(--green); font-family:'Share Tech Mono',monospace; font-size:13px; padding:8px 12px; outline:none; }
+  .remind-add input:focus { border-color:var(--green); box-shadow:0 0 8px rgba(0,191,255,0.1); }
+  .remind-list { flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:5px; }
+  .remind-item { display:flex; align-items:center; gap:10px; padding:9px 12px; border:1px solid rgba(0,191,255,0.15); background:rgba(0,191,255,0.02); transition:all 0.15s; }
+  .remind-item.done { opacity:0.4; }
+  .remind-item.done .remind-text { text-decoration:line-through; }
+  .remind-check { width:16px; height:16px; border:1px solid rgba(0,191,255,0.4); cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all 0.1s; }
+  .remind-check:hover { border-color:var(--green); background:rgba(0,191,255,0.1); }
+  .remind-check.checked { background:var(--green); border-color:var(--green); }
+  .remind-check.checked::after { content:'✓'; font-size:10px; color:var(--bg); font-weight:bold; }
+  .remind-text { flex:1; font-size:13px; color:var(--green); letter-spacing:0.05em; }
+  .remind-del  { font-size:14px; color:rgba(255,34,34,0.4); cursor:pointer; padding:0 4px; transition:color 0.1s; }
+  .remind-del:hover { color:var(--red); }
+  .remind-filters { display:flex; gap:6px; }
+  .remind-filter { font-size:10px; letter-spacing:0.15em; padding:3px 10px; border:1px solid rgba(0,191,255,0.2); color:var(--green-dim); cursor:pointer; transition:all 0.1s; }
+  .remind-filter.active, .remind-filter:hover { border-color:var(--green); color:var(--green); background:rgba(0,191,255,0.08); }
+
+  /* ══ ANOTAÇÕES ══ */
+  .notes-wrap { display:flex; height:100%; gap:0; }
+  .notes-sidebar { width:200px; flex-shrink:0; border-right:1px solid rgba(0,191,255,0.15); display:flex; flex-direction:column; padding:10px 0; }
+  .notes-sidebar-hdr { font-size:9px; letter-spacing:0.25em; color:var(--green-dim); padding:4px 14px 10px; }
+  .note-item { padding:8px 14px; cursor:pointer; border-left:3px solid transparent; transition:all 0.1s; }
+  .note-item:hover, .note-item.active { border-left-color:var(--green); background:rgba(0,191,255,0.06); }
+  .note-item-title { font-size:12px; color:var(--green); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .note-item-date  { font-size:9px; color:var(--green-dim); margin-top:2px; letter-spacing:0.1em; }
+  .notes-add-btn { margin:8px 14px 0; }
+  .notes-editor { flex:1; display:flex; flex-direction:column; padding:16px 20px; gap:10px; min-width:0; }
+  .notes-title-input { background:transparent; border:none; border-bottom:1px solid rgba(0,191,255,0.2); color:var(--green); font-family:'VT323',monospace; font-size:26px; letter-spacing:0.15em; padding:4px 0; outline:none; width:100%; }
+  .notes-title-input::placeholder { color:rgba(0,191,255,0.2); }
+  .notes-body-input { flex:1; background:rgba(0,191,255,0.02); border:1px solid rgba(0,191,255,0.12); color:rgba(0,191,255,0.8); font-family:'Share Tech Mono',monospace; font-size:13px; padding:14px; outline:none; resize:none; line-height:1.7; letter-spacing:0.04em; }
+  .notes-body-input:focus { border-color:rgba(0,191,255,0.3); }
+  .notes-body-input::placeholder { color:rgba(0,191,255,0.18); }
+  .notes-empty { display:flex; align-items:center; justify-content:center; flex:1; color:rgba(0,191,255,0.2); font-size:13px; letter-spacing:0.2em; }
+
+  /* ══ CHAT ══ */
+  .chat-wrap { display:flex; height:100%; }
+  .chat-sidebar { width:220px; flex-shrink:0; border-right:1px solid rgba(0,191,255,0.15); display:flex; flex-direction:column; }
+  .chat-sidebar-hdr { padding:12px 14px 8px; font-size:9px; letter-spacing:0.25em; color:var(--green-dim); border-bottom:1px solid rgba(0,191,255,0.1); }
+  .chat-list { flex:1; overflow-y:auto; }
+  .chat-contact { display:flex; align-items:center; gap:10px; padding:10px 12px; cursor:pointer; border-left:3px solid transparent; transition:all 0.12s; }
+  .chat-contact:hover, .chat-contact.active { background:rgba(0,191,255,0.07); border-left-color:var(--green); }
+  .chat-contact.active .chat-contact-name { color:var(--green); text-shadow:0 0 6px var(--green); }
+  .chat-avatar { width:32px; height:32px; border:1px solid rgba(0,191,255,0.3); display:flex; align-items:center; justify-content:center; font-family:'VT323',monospace; font-size:16px; color:var(--green); flex-shrink:0; background:rgba(0,191,255,0.05); }
+  .chat-avatar.group { border-color:rgba(255,176,0,0.4); color:var(--amber); background:rgba(255,176,0,0.05); }
+  .chat-contact-name { font-size:12px; color:rgba(0,191,255,0.7); letter-spacing:0.08em; }
+  .chat-contact-last { font-size:10px; color:rgba(0,191,255,0.35); margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:130px; }
+  .chat-unread { background:var(--green); color:var(--bg); font-size:9px; padding:1px 5px; border-radius:0; margin-left:auto; }
+  .chat-main { flex:1; display:flex; flex-direction:column; min-width:0; }
+  .chat-header { padding:10px 16px; border-bottom:1px solid rgba(0,191,255,0.15); display:flex; align-items:center; gap:10px; background:rgba(0,191,255,0.02); flex-shrink:0; }
+  .chat-header-name { font-family:'VT323',monospace; font-size:20px; color:var(--green); letter-spacing:0.15em; }
+  .chat-header-status { font-size:9px; color:var(--green-dim); letter-spacing:0.15em; }
+  .chat-online { display:inline-block; width:6px; height:6px; background:#00ff88; border-radius:50%; margin-right:4px; box-shadow:0 0 4px #00ff88; }
+  .chat-messages { flex:1; overflow-y:auto; padding:14px 16px; display:flex; flex-direction:column; gap:8px; }
+  .chat-msg { max-width:72%; display:flex; flex-direction:column; gap:2px; }
+  .chat-msg.sent { align-self:flex-end; align-items:flex-end; }
+  .chat-msg.recv { align-self:flex-start; align-items:flex-start; }
+  .chat-bubble { padding:8px 12px; font-size:13px; line-height:1.5; letter-spacing:0.04em; }
+  .chat-msg.sent .chat-bubble { background:rgba(0,191,255,0.12); border:1px solid rgba(0,191,255,0.25); color:var(--green); border-radius:0 0 0 0; }
+  .chat-msg.recv .chat-bubble { background:rgba(0,191,255,0.04); border:1px solid rgba(0,191,255,0.15); color:rgba(0,191,255,0.8); }
+  .chat-msg-meta { font-size:9px; color:rgba(0,191,255,0.3); letter-spacing:0.1em; }
+  .chat-msg-sender { font-size:9px; color:var(--amber); letter-spacing:0.15em; margin-bottom:2px; }
+  .chat-input-bar { display:flex; gap:8px; padding:10px 16px; border-top:1px solid rgba(0,191,255,0.15); background:rgba(0,191,255,0.02); flex-shrink:0; }
+  .chat-input { flex:1; background:rgba(0,191,255,0.04); border:1px solid rgba(0,191,255,0.2); color:var(--green); font-family:'Share Tech Mono',monospace; font-size:13px; padding:8px 12px; outline:none; letter-spacing:0.05em; }
+  .chat-input:focus { border-color:rgba(0,191,255,0.5); }
+  .chat-send { background:transparent; border:1px solid rgba(0,191,255,0.35); color:rgba(0,191,255,0.6); font-family:'Share Tech Mono',monospace; font-size:12px; padding:8px 16px; cursor:pointer; letter-spacing:0.15em; transition:all 0.15s; }
+  .chat-send:hover { border-color:var(--green); color:var(--green); box-shadow:0 0 10px rgba(0,191,255,0.2); }
+  .chat-empty { display:flex; align-items:center; justify-content:center; flex:1; color:rgba(0,191,255,0.2); font-size:12px; letter-spacing:0.2em; }
+  .chat-new-contact { padding:8px 12px; border-top:1px solid rgba(0,191,255,0.1); }
+  .chat-new-input { width:100%; background:rgba(0,191,255,0.03); border:1px solid rgba(0,191,255,0.15); color:var(--green); font-family:'Share Tech Mono',monospace; font-size:11px; padding:5px 8px; outline:none; }
+
+
+  /* ══ DMAIL ══ */
+  .mail-wrap        { display:flex; height:100%; }
+  .mail-sidebar     { width:200px; flex-shrink:0; border-right:1px solid rgba(0,191,255,0.15); display:flex; flex-direction:column; padding:10px 0; }
+  .mail-compose-btn { margin:0 12px 12px; padding:10px; background:rgba(0,191,255,0.08); border:1px solid rgba(0,191,255,0.3); color:var(--green); font-family:'Share Tech Mono',monospace; font-size:12px; letter-spacing:0.15em; cursor:pointer; transition:all 0.15s; text-align:center; }
+  .mail-compose-btn:hover { background:rgba(0,191,255,0.18); box-shadow:0 0 12px rgba(0,191,255,0.2); }
+  .mail-folder      { display:flex; align-items:center; gap:10px; padding:8px 14px; cursor:pointer; border-left:3px solid transparent; transition:all 0.1s; color:rgba(0,191,255,0.5); font-size:12px; letter-spacing:0.12em; }
+  .mail-folder:hover, .mail-folder.active { border-left-color:var(--green); color:var(--green); background:rgba(0,191,255,0.06); }
+  .mail-folder-icon { font-size:14px; }
+  .mail-badge       { margin-left:auto; background:var(--green); color:var(--bg); font-size:9px; padding:1px 5px; min-width:16px; text-align:center; }
+  .mail-main        { flex:1; display:flex; flex-direction:column; min-width:0; }
+  .mail-list-header { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; border-bottom:1px solid rgba(0,191,255,0.12); background:rgba(0,191,255,0.02); flex-shrink:0; }
+  .mail-list-title  { font-family:'VT323',monospace; font-size:18px; color:var(--green); letter-spacing:0.2em; }
+  .mail-list        { flex:1; overflow-y:auto; }
+  .mail-item        { display:flex; align-items:flex-start; gap:12px; padding:12px 16px; border-bottom:1px solid rgba(0,191,255,0.07); cursor:pointer; transition:all 0.1s; position:relative; }
+  .mail-item:hover  { background:rgba(0,191,255,0.05); }
+  .mail-item.active { background:rgba(0,191,255,0.08); border-left:2px solid var(--green); }
+  .mail-item.unread .mail-item-sender { color:var(--green); }
+  .mail-item.unread::before { content:''; position:absolute; left:6px; top:50%; transform:translateY(-50%); width:5px; height:5px; background:var(--green); border-radius:50%; box-shadow:0 0 4px var(--green); }
+  .mail-item-avatar { width:32px; height:32px; border:1px solid rgba(0,191,255,0.3); display:flex; align-items:center; justify-content:center; font-family:'VT323',monospace; font-size:16px; color:var(--green); flex-shrink:0; background:rgba(0,191,255,0.05); }
+  .mail-item-body   { flex:1; min-width:0; }
+  .mail-item-sender { font-size:12px; color:rgba(0,191,255,0.6); letter-spacing:0.08em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mail-item-subj   { font-size:13px; color:rgba(0,191,255,0.8); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mail-item-prev   { font-size:10px; color:rgba(0,191,255,0.3); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mail-item-time   { font-size:10px; color:rgba(0,191,255,0.3); flex-shrink:0; letter-spacing:0.08em; }
+  /* Leitura */
+  .mail-reader      { display:none; flex-direction:column; height:100%; border-left:1px solid rgba(0,191,255,0.15); width:55%; flex-shrink:0; }
+  .mail-reader.open { display:flex; }
+  .mail-reader-hdr  { padding:14px 18px; border-bottom:1px solid rgba(0,191,255,0.12); background:rgba(0,191,255,0.02); }
+  .mail-reader-subj { font-family:'VT323',monospace; font-size:22px; color:var(--green); letter-spacing:0.15em; margin-bottom:6px; }
+  .mail-reader-meta { font-size:11px; color:rgba(0,191,255,0.4); letter-spacing:0.1em; line-height:1.7; }
+  .mail-reader-body { flex:1; overflow-y:auto; padding:18px; font-size:13px; color:rgba(0,191,255,0.8); line-height:1.85; letter-spacing:0.04em; white-space:pre-wrap; }
+  .mail-reader-actions { display:flex; gap:8px; padding:10px 18px; border-top:1px solid rgba(0,191,255,0.12); flex-shrink:0; }
+  /* Compose */
+  .mail-compose     { display:none; position:absolute; bottom:0; right:0; width:480px; background:#0a1a1a; border:1px solid rgba(0,191,255,0.3); border-bottom:none; box-shadow:0 -4px 20px rgba(0,191,255,0.1); flex-direction:column; z-index:10; }
+  .mail-compose.open { display:flex; }
+  .mail-compose-hdr { display:flex; align-items:center; justify-content:space-between; padding:8px 14px; background:rgba(0,191,255,0.08); border-bottom:1px solid rgba(0,191,255,0.15); }
+  .mail-compose-title { font-family:'VT323',monospace; font-size:16px; color:var(--green); letter-spacing:0.15em; }
+  .mail-compose-field { display:flex; align-items:center; border-bottom:1px solid rgba(0,191,255,0.1); }
+  .mail-compose-label { font-size:10px; color:rgba(0,191,255,0.4); letter-spacing:0.2em; padding:8px 12px; min-width:50px; flex-shrink:0; }
+  .mail-compose-input { flex:1; background:transparent; border:none; color:var(--green); font-family:'Share Tech Mono',monospace; font-size:12px; padding:8px 10px; outline:none; letter-spacing:0.05em; }
+  .mail-compose-body  { flex:1; background:transparent; border:none; color:rgba(0,191,255,0.8); font-family:'Share Tech Mono',monospace; font-size:12px; padding:12px; outline:none; resize:none; min-height:160px; line-height:1.7; letter-spacing:0.04em; }
+  .mail-compose-footer { display:flex; align-items:center; justify-content:space-between; padding:8px 12px; border-top:1px solid rgba(0,191,255,0.1); }
 </style>
 </head>
 <body>
 
 <!-- ========== LOGIN SCREEN ========== -->
 <div id="login-screen">
-  <span class="login-corner tl">DTOS v15.5</span>
+  <span class="login-corner tl">DTOS v16.2</span>
   <span class="login-corner tr">SEC-LAYER: ACTIVE</span>
   <span class="login-corner bl">NODE: ALPHA-CENTRAL</span>
   <span class="login-corner br" id="login-clock-corner"></span>
@@ -1142,7 +1307,7 @@
 
   <!-- Top Bar -->
   <div class="topbar">
-    <div class="sys-name">Dt<span style="color:var(--green)">O</span>s <span style="font-family:'Share Tech Mono';font-size:11px;color:var(--green-dim)">v15.5</span></div>
+    <div class="sys-name">Dt<span style="color:var(--green)">O</span>s <span style="font-family:'Share Tech Mono';font-size:11px;color:var(--green-dim)">v16.2</span></div>
     <div>USER: <span style="color:var(--green)">ADMIN</span> &nbsp;|&nbsp; CLEARANCE: <span style="color:var(--amber)">ALPHA-7</span></div>
   </div>
 
@@ -1186,32 +1351,50 @@ o888bood8P'   `Y8bod8P' o888o   "888" `Y888""8o       `Y8bood8P'  `Y8bod8P' d888
         <!-- Header -->
         <div class="home-topbar">
           <div class="panel-title">DELTA OPERATING SYSTEM</div>
-          <div class="panel-sub">NET STATUS: ONLINE &nbsp;|&nbsp; TODOS OS SISTEMAS OPERACIONAIS</div>
+          <div class="panel-sub">NET STATUS: ONLINE</div>
         </div>
 
         <!-- Grid de apps -->
         <div class="home-apps">
           <div class="app-icon" onclick="openApp('dss')">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path d="M250.323 103.646L409.363 379.047L91.282 379.047Z" fill="none" stroke="currentColor" stroke-width="9"/><path d="M250.727 136.707L381.495 362.921L119.959 362.921Z" fill="none" stroke="currentColor" stroke-width="9" opacity=".5"/></svg><span>DSS CONTRACTS</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style=""> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg><span>DSS CONTRACTS</span>
           </div>
           <div class="app-icon" onclick="openApp('recrutamento')">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path d="M250.323 103.646L409.363 379.047L91.282 379.047Z" fill="none" stroke="currentColor" stroke-width="9"/><path d="M250.727 136.707L381.495 362.921L119.959 362.921Z" fill="none" stroke="currentColor" stroke-width="9" opacity=".5"/></svg><span>DFF RECRUITMENT</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style=""> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg><span>DFF RECRUITMENT</span>
           </div>
           <div class="app-icon" onclick="openApp('esquadrao')">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path d="M250.323 103.646L409.363 379.047L91.282 379.047Z" fill="none" stroke="currentColor" stroke-width="9"/><path d="M250.727 136.707L381.495 362.921L119.959 362.921Z" fill="none" stroke="currentColor" stroke-width="9" opacity=".5"/></svg><span>DFF SQUAD DEPLOY</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.395391, 0, 0, 5.395391, 185.086716, 233.021713)" style="visibility: hidden;"> <path d="M4 2H20C20.5523 2 21 2.44772 21 3V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V3C3 2.44772 3.44772 2 4 2ZM7 12V14H9V12H7ZM7 16V18H9V16H7ZM11 12V14H13V12H11ZM11 16V18H13V16H11ZM15 12V18H17V12H15ZM7 6V10H17V6H7Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.496664, 0, 0, 5.496664, 184.322784, 220.532257)" style=""> <path d="M13 11V6H11V13H17V11H13ZM18.364 17.364L12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg><span>DFF SQUAD DEPLOY</span>
           </div>
           <div class="app-icon" onclick="openApp('explorer')">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path d="M250.323 103.646L409.363 379.047L91.282 379.047Z" fill="none" stroke="currentColor" stroke-width="9"/><path d="M250.727 136.707L381.495 362.921L119.959 362.921Z" fill="none" stroke="currentColor" stroke-width="9" opacity=".5"/></svg><span>DB EXPLORER</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style=""> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg><span>DB EXPLORER</span>
           </div>
           <div class="app-icon" onclick="openApp('biblioteca')">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path d="M250.323 103.646L409.363 379.047L91.282 379.047Z" fill="none" stroke="currentColor" stroke-width="9"/><path d="M250.727 136.707L381.495 362.921L119.959 362.921Z" fill="none" stroke="currentColor" stroke-width="9" opacity=".5"/></svg><span>DELTA LIBRARY</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style=""> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg><span>DELTA FILES</span>
+          </div>
+          <div class="app-icon" onclick="openApp('calendario')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style=""> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg><span>CALENDÁRIO</span>
+          </div>
+          <div class="app-icon" onclick="openApp('lembretes')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style=""> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg><span>LEMBRETES</span>
+          </div>
+          <div class="app-icon" onclick="openApp('notas')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.395391, 0, 0, 5.395391, 185.086716, 233.021713)" style="visibility: hidden;"> <path d="M4 2H20C20.5523 2 21 2.44772 21 3V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V3C3 2.44772 3.44772 2 4 2ZM7 12V14H9V12H7ZM7 16V18H9V16H7ZM11 12V14H13V12H11ZM11 16V18H13V16H11ZM15 12V18H17V12H15ZM7 6V10H17V6H7Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.496664, 0, 0, 5.496664, 184.322784, 220.532257)" style=""> <path d="M13 11V6H11V13H17V11H13ZM18.364 17.364L12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg><span>ANOTAÇÕES</span>
+          </div>
+          <div class="app-icon" onclick="openApp('calculadora')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.395391, 0, 0, 5.395391, 185.086716, 233.021713)" style=""> <path d="M4 2H20C20.5523 2 21 2.44772 21 3V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V3C3 2.44772 3.44772 2 4 2ZM7 12V14H9V12H7ZM7 16V18H9V16H7ZM11 12V14H13V12H11ZM11 16V18H13V16H11ZM15 12V18H17V12H15ZM7 6V10H17V6H7Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.496664, 0, 0, 5.496664, 184.322784, 220.532257)" style="visibility: hidden;"> <path d="M13 11V6H11V13H17V11H13ZM18.364 17.364L12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg><span>CALCULADORA</span>
+          </div>
+          <div class="app-icon" onclick="openApp('dmail')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.395391, 0, 0, 5.395391, 185.086716, 233.021713)" style="visibility: hidden;"> <path d="M4 2H20C20.5523 2 21 2.44772 21 3V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V3C3 2.44772 3.44772 2 4 2ZM7 12V14H9V12H7ZM7 16V18H9V16H7ZM11 12V14H13V12H11ZM11 16V18H13V16H11ZM15 12V18H17V12H15ZM7 6V10H17V6H7Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.496664, 0, 0, 5.496664, 184.322784, 220.532257)" style="visibility: hidden;"> <path d="M13 11V6H11V13H17V11H13ZM18.364 17.364L12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> <g transform="matrix(5.299014, 0, 0, 5.299014, 186.781815, 236.424286)" style=""> <path d="M3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3ZM12.0606 11.6829L5.64722 6.2377L4.35278 7.7623L12.0731 14.3171L19.6544 7.75616L18.3456 6.24384L12.0606 11.6829Z" style="fill: currentColor;"/> </g> </svg><span>DMAIL</span>
+          </div>
+          <div class="app-icon" onclick="openApp('chat')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style=""> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg><span>DELTA COMM</span>
           </div>
         </div>
 
         <!-- Barra inferior -->
         <div class="home-footer">
           <div class="home-footer-log">
-            <div class="home-log-title">&#9658; LOG DE ATIVIDADES RECENTES</div>
+            <div class="home-log-title">&#916; LOG DE ATIVIDADES RECENTES</div>
             <div class="log-stream" id="home-log">
               <div class="log-ok">[BOOT] Sistema Delta Net inicializado com sucesso.</div>
               <div class="log-ok">[SYS ] Módulos DSS, DFF, DB carregados.</div>
@@ -1350,9 +1533,9 @@ o888bood8P'   `Y8bod8P' o888o   "888" `Y888""8o       `Y8bood8P'  `Y8bod8P' d888
         </div>
         <div class="panel-body">
           <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
-            <button class="btn" onclick="explorerModo('recrutas')">📁 DFF RECRUTAS</button>
-            <button class="btn" onclick="explorerModo('squads')">📁 DFF ESQUADRÕES</button>
-            <button class="btn" onclick="explorerModo('contratos')">📁 DSS CONTRATOS</button>
+            <button class="btn" onclick="explorerModo('recrutas')"> DFF RECRUTAS</button>
+            <button class="btn" onclick="explorerModo('squads')"> DFF ESQUADRÕES</button>
+            <button class="btn" onclick="explorerModo('contratos')"> DSS CONTRATOS</button>
           </div>
           <div id="explorer-output">
             <div class="terminal-box">
@@ -1363,11 +1546,11 @@ o888bood8P'   `Y8bod8P' o888o   "888" `Y888""8o       `Y8bood8P'  `Y8bod8P' d888
       </div>
 
 
-      <!-- DELTA LIBRARY -->
+      <!-- DELTA FILES -->
       <div class="panel" id="panel-biblioteca">
         <div class="panel-header">
           <div style="flex:1">
-            <div class="panel-title">DELTA LIBRARY &mdash; ARQUIVO CENTRAL</div>
+            <div class="panel-title">DELTA FILES &mdash; ARQUIVO CENTRAL</div>
             <div class="panel-sub">DOCUMENTOS CLASSIFICADOS &nbsp;|&nbsp; CLEARANCE NECESSARIO</div>
           </div>
           <button class="win-close" onclick="closeApp('biblioteca')" title="FECHAR">&#x2715;</button>
@@ -1391,6 +1574,233 @@ o888bood8P'   `Y8bod8P' o888o   "888" `Y888""8o       `Y8bood8P'  `Y8bod8P' d888
               <span id="lib-viewer-title" style="font-family:'VT323',monospace;font-size:20px;color:var(--green);text-shadow:0 0 6px var(--green)"></span>
             </div>
             <div id="lib-viewer-content" class="terminal-box" style="max-height:calc(100vh - 260px);overflow-y:auto;line-height:1.85;font-size:13px;white-space:pre-wrap"></div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- CALCULADORA -->
+      <div class="panel" id="panel-calculadora">
+        <div class="panel-header">
+          <div style="flex:1"><div class="panel-title">DELTA CALC</div><div class="panel-sub">CALCULADORA CIENT&#xCD;FICA v2.0</div></div>
+          <button class="win-close" onclick="closeApp('calculadora')" title="FECHAR">&#x2715;</button>
+        </div>
+        <div class="panel-body" style="display:flex;align-items:flex-start;justify-content:center;padding:20px">
+          <div class="calc-sci-wrap">
+            <div class="calc-display">
+              <div class="calc-expr" id="calc-expr">&nbsp;</div>
+              <div class="calc-val" id="calc-val">0</div>
+              <div class="calc-mode-row">
+                <span class="calc-mode-btn active" id="cmode-deg" onclick="calcSetMode('deg')">DEG</span>
+                <span class="calc-mode-btn" id="cmode-rad" onclick="calcSetMode('rad')">RAD</span>
+                <span id="calc-mem-indicator" style="margin-left:auto;font-size:10px;color:var(--amber);letter-spacing:0.15em;opacity:0">M</span>
+              </div>
+            </div>
+            <div class="calc-sci-grid">
+              <button class="calc-btn sci" onclick="calcSci('sin')">sin</button>
+              <button class="calc-btn sci" onclick="calcSci('cos')">cos</button>
+              <button class="calc-btn sci" onclick="calcSci('tan')">tan</button>
+              <button class="calc-btn sci" onclick="calcSci('log')">log</button>
+              <button class="calc-btn sci" onclick="calcSci('ln')">ln</button>
+              <button class="calc-btn sci" onclick="calcSci('asin')">sin&#x207B;&#xB9;</button>
+              <button class="calc-btn sci" onclick="calcSci('acos')">cos&#x207B;&#xB9;</button>
+              <button class="calc-btn sci" onclick="calcSci('atan')">tan&#x207B;&#xB9;</button>
+              <button class="calc-btn sci" onclick="calcSci('sqrt')">&#x221Ax</button>
+              <button class="calc-btn sci" onclick="calcSci('cbrt')">&#x221Bx</button>
+              <button class="calc-btn sci" onclick="calcSci('pow2')">x&#xB2;</button>
+              <button class="calc-btn sci" onclick="calcSci('pow3')">x&#xB3;</button>
+              <button class="calc-btn sci" onclick="calcOp('**')">x&#x02B8;</button>
+              <button class="calc-btn sci" onclick="calcSci('inv')">1/x</button>
+              <button class="calc-btn sci" onclick="calcSci('abs')">|x|</button>
+              <button class="calc-btn sci" onclick="calcConst('pi')">&#x3C0;</button>
+              <button class="calc-btn sci" onclick="calcConst('e')">e</button>
+              <button class="calc-btn sci" onclick="calcSci('fact')">n!</button>
+              <button class="calc-btn sci" onclick="calcMemStore()">MS</button>
+              <button class="calc-btn sci" onclick="calcMemRecall()">MR</button>
+            </div>
+            <div class="calc-divider"></div>
+            <div class="calc-basic-grid">
+              <button class="calc-btn danger" onclick="calcClear()">C</button>
+              <button class="calc-btn danger" onclick="calcDel()">&#x232B;</button>
+              <button class="calc-btn op" onclick="calcOp('%')">%</button>
+              <button class="calc-btn op" onclick="calcOp('/')">&#xF7;</button>
+              <button class="calc-btn" onclick="calcNum('7')">7</button>
+              <button class="calc-btn" onclick="calcNum('8')">8</button>
+              <button class="calc-btn" onclick="calcNum('9')">9</button>
+              <button class="calc-btn op" onclick="calcOp('*')">&#xD7;</button>
+              <button class="calc-btn" onclick="calcNum('4')">4</button>
+              <button class="calc-btn" onclick="calcNum('5')">5</button>
+              <button class="calc-btn" onclick="calcNum('6')">6</button>
+              <button class="calc-btn op" onclick="calcOp('-')">&#x2212;</button>
+              <button class="calc-btn" onclick="calcNum('1')">1</button>
+              <button class="calc-btn" onclick="calcNum('2')">2</button>
+              <button class="calc-btn" onclick="calcNum('3')">3</button>
+              <button class="calc-btn op" onclick="calcOp('+')">+</button>
+              <button class="calc-btn" onclick="calcSign()">+/&#x2212;</button>
+              <button class="calc-btn" onclick="calcNum('0')">0</button>
+              <button class="calc-btn" onclick="calcDot()">.</button>
+              <button class="calc-btn eq" onclick="calcEquals()">=</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CALENDÁRIO -->
+      <div class="panel" id="panel-calendario">
+        <div class="panel-header">
+          <div style="flex:1"><div class="panel-title">CALENDÁRIO</div><div class="panel-sub">DELTA SCHEDULE — EVENTOS E ALERTAS</div></div>
+          <button class="win-close" onclick="closeApp('calendario')" title="FECHAR">&#x2715;</button>
+        </div>
+        <div class="panel-body">
+          <div class="cal-wrap">
+            <div class="cal-nav">
+              <button class="btn" onclick="calNav(-1)">&#9664;</button>
+              <div class="cal-month" id="cal-month-label"></div>
+              <button class="btn" onclick="calNav(1)">&#9654;</button>
+            </div>
+            <div class="cal-grid" id="cal-grid"></div>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:4px">
+              <div class="sec-hdr" style="margin:0">EVENTOS</div>
+              <span id="cal-sel-date" style="font-size:11px;color:var(--green-dim);letter-spacing:0.15em"></span>
+            </div>
+            <div class="cal-add-form">
+              <input type="text" id="cal-evt-name" placeholder="NOME DO EVENTO..." style="flex:1;min-width:160px">
+              <input type="time" id="cal-evt-time" style="width:100px;color-scheme:dark">
+              <button class="btn" onclick="calAddEvent()">+ ADICIONAR</button>
+            </div>
+            <div class="cal-events" id="cal-events-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEMBRETES -->
+      <div class="panel" id="panel-lembretes">
+        <div class="panel-header">
+          <div style="flex:1"><div class="panel-title">LEMBRETES</div><div class="panel-sub">DELTA TASKS — GERENCIAR TAREFAS</div></div>
+          <button class="win-close" onclick="closeApp('lembretes')" title="FECHAR">&#x2715;</button>
+        </div>
+        <div class="panel-body">
+          <div class="remind-wrap">
+            <div class="remind-filters">
+              <div class="remind-filter active" id="rf-all"    onclick="remindFilter('all')">TODOS</div>
+              <div class="remind-filter"        id="rf-active" onclick="remindFilter('active')">PENDENTES</div>
+              <div class="remind-filter"        id="rf-done"   onclick="remindFilter('done')">CONCLUÍDOS</div>
+            </div>
+            <div class="remind-add">
+              <input type="text" id="remind-input" placeholder="NOVA TAREFA..." onkeydown="if(event.key==='Enter')remindAdd()">
+              <button class="btn" onclick="remindAdd()">+ ADD</button>
+            </div>
+            <div class="remind-list" id="remind-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANOTAÇÕES -->
+      <div class="panel" id="panel-notas">
+        <div class="panel-header">
+          <div style="flex:1"><div class="panel-title">ANOTAÇÕES</div><div class="panel-sub">DELTA NOTES — ARQUIVO PESSOAL</div></div>
+          <button class="win-close" onclick="closeApp('notas')" title="FECHAR">&#x2715;</button>
+        </div>
+        <div class="notes-wrap">
+          <div class="notes-sidebar">
+            <div class="notes-sidebar-hdr">ARQUIVOS</div>
+            <div id="notes-list"></div>
+            <div style="padding:8px 14px;margin-top:auto;border-top:1px solid rgba(0,191,255,0.1)">
+              <button class="btn" style="width:100%;font-size:11px" onclick="notesNew()">+ NOVA NOTA</button>
+            </div>
+          </div>
+          <div class="notes-editor" id="notes-editor">
+            <div class="notes-empty" id="notes-empty">SELECIONE OU CRIE UMA NOTA</div>
+            <input type="text" class="notes-title-input" id="notes-title" placeholder="TÍTULO..." oninput="notesSave()" style="display:none">
+            <textarea class="notes-body-input" id="notes-body" placeholder="Escreva aqui..." oninput="notesSave()" style="display:none"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHAT -->
+      <div class="panel" id="panel-chat">
+        <div class="panel-header">
+          <div style="flex:1"><div class="panel-title">DELTA COMM</div><div class="panel-sub">COMUNICAÇÕES SEGURAS — CRIPTOGRAFIA ATIVA</div></div>
+          <button class="win-close" onclick="closeApp('chat')" title="FECHAR">&#x2715;</button>
+        </div>
+        <div class="chat-wrap">
+          <div class="chat-sidebar">
+            <div class="chat-sidebar-hdr">CONTATOS &amp; GRUPOS</div>
+            <div class="chat-list" id="chat-contact-list"></div>
+            <div class="chat-new-contact">
+              <input type="text" class="chat-new-input" id="chat-new-name" placeholder="+ NOVO CONTATO/GRUPO..." onkeydown="if(event.key==='Enter')chatNewContact()">
+            </div>
+          </div>
+          <div class="chat-main" id="chat-main">
+            <div class="chat-empty" id="chat-empty">SELECIONE UM CONTATO</div>
+            <div id="chat-active" style="display:none;flex-direction:column;height:100%">
+              <div class="chat-header">
+                <div>
+                  <div class="chat-header-name" id="chat-active-name"></div>
+                  <div class="chat-header-status"><span class="chat-online"></span><span id="chat-active-status">ONLINE — CANAL SEGURO</span></div>
+                </div>
+              </div>
+              <div class="chat-messages" id="chat-messages"></div>
+              <div class="chat-input-bar">
+                <input type="text" class="chat-input" id="chat-input" placeholder="MENSAGEM CRIPTOGRAFADA..." onkeydown="if(event.key==='Enter')chatSend()">
+                <button class="chat-send" onclick="chatSend()">ENVIAR &#9658;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- DMAIL -->
+      <div class="panel" id="panel-dmail" style="position:relative">
+        <div class="panel-header">
+          <div style="flex:1"><div class="panel-title">DMAIL</div><div class="panel-sub">DELTA MAIL — COMUNICAÇÕES CLASSIFICADAS</div></div>
+          <button class="win-close" onclick="closeApp('dmail')" title="FECHAR">&#x2715;</button>
+        </div>
+        <div style="display:flex;flex:1;overflow:hidden;position:relative">
+          <!-- Sidebar folders -->
+          <div class="mail-sidebar">
+            <button class="mail-compose-btn" onclick="mailOpenCompose()">&#x2295; NOVO DMAIL</button>
+            <div class="mail-folder active" id="mf-inbox"   onclick="mailFolder('inbox')">  <span class="mail-folder-icon">&#x25B8;</span> ENTRADA   <span class="mail-badge" id="mb-inbox">3</span></div>
+            <div class="mail-folder"        id="mf-sent"    onclick="mailFolder('sent')">   <span class="mail-folder-icon">&#x25B8;</span> ENVIADOS  </div>
+            <div class="mail-folder"        id="mf-starred" onclick="mailFolder('starred')"><span class="mail-folder-icon">&#x25B8;</span> MARCADOS  </div>
+            <div class="mail-folder"        id="mf-trash"   onclick="mailFolder('trash')">  <span class="mail-folder-icon">&#x25B8;</span> LIXEIRA   </div>
+          </div>
+          <!-- Lista de emails -->
+          <div class="mail-main">
+            <div class="mail-list-header">
+              <div class="mail-list-title" id="mail-folder-title">ENTRADA</div>
+              <div style="font-size:10px;color:rgba(0,191,255,0.35);letter-spacing:0.15em" id="mail-count"></div>
+            </div>
+            <div class="mail-list" id="mail-list"></div>
+          </div>
+          <!-- Leitor -->
+          <div class="mail-reader" id="mail-reader">
+            <div class="mail-reader-hdr">
+              <div class="mail-reader-subj" id="mr-subj"></div>
+              <div class="mail-reader-meta" id="mr-meta"></div>
+            </div>
+            <div class="mail-reader-body" id="mr-body"></div>
+            <div class="mail-reader-actions">
+              <button class="btn" onclick="mailReply()">&#x21A9; RESPONDER</button>
+              <button class="btn btn-amber" onclick="mailStar()">&#x2605; MARCAR</button>
+              <button class="btn danger" onclick="mailDelete()" style="margin-left:auto">&#x2715; EXCLUIR</button>
+            </div>
+          </div>
+          <!-- Compose overlay -->
+          <div class="mail-compose" id="mail-compose">
+            <div class="mail-compose-hdr">
+              <div class="mail-compose-title">NOVA MENSAGEM</div>
+              <button onclick="mailCloseCompose()" style="background:transparent;border:none;color:rgba(0,191,255,0.5);cursor:pointer;font-size:16px">&#x2715;</button>
+            </div>
+            <div class="mail-compose-field"><span class="mail-compose-label">PARA</span><input class="mail-compose-input" id="mc-to" placeholder="destinatario@delta.net"></div>
+            <div class="mail-compose-field"><span class="mail-compose-label">CC</span><input class="mail-compose-input" id="mc-cc" placeholder="(opcional)"></div>
+            <div class="mail-compose-field"><span class="mail-compose-label">ASSUNTO</span><input class="mail-compose-input" id="mc-subj" placeholder="Assunto..."></div>
+            <textarea class="mail-compose-body" id="mc-body" placeholder="Escreva sua mensagem aqui..."></textarea>
+            <div class="mail-compose-footer">
+              <button class="btn" onclick="mailSend()">&#x25BA; ENVIAR</button>
+              <button onclick="mailCloseCompose()" style="background:transparent;border:none;color:rgba(0,191,255,0.4);cursor:pointer;font-size:11px;letter-spacing:0.15em">DESCARTAR</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1545,12 +1955,31 @@ setInterval(updateClock, 1000);
 
 // ===================== PANEL NAV =====================
 // IDs dos apps e seus títulos para a taskbar
+var APP_SVGS = {
+  'dmail': '<svg class="task-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.395391, 0, 0, 5.395391, 185.086716, 233.021713)" style="visibility: hidden;"> <path d="M4 2H20C20.5523 2 21 2.44772 21 3V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V3C3 2.44772 3.44772 2 4 2ZM7 12V14H9V12H7ZM7 16V18H9V16H7ZM11 12V14H13V12H11ZM11 16V18H13V16H11ZM15 12V18H17V12H15ZM7 6V10H17V6H7Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.496664, 0, 0, 5.496664, 184.322784, 220.532257)" style="visibility: hidden;"> <path d="M13 11V6H11V13H17V11H13ZM18.364 17.364L12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> <g transform="matrix(5.299014, 0, 0, 5.299014, 186.781815, 236.424286)" style=""> <path d="M3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3ZM12.0606 11.6829L5.64722 6.2377L4.35278 7.7623L12.0731 14.3171L19.6544 7.75616L18.3456 6.24384L12.0606 11.6829Z" style="fill: currentColor;"/> </g> </svg>',
+  'dss': '<svg class="task-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style=""> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg>',
+  'recrutamento': '<svg class="task-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style=""> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg>',
+  'esquadrao': '<svg class="task-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.395391, 0, 0, 5.395391, 185.086716, 233.021713)" style="visibility: hidden;"> <path d="M4 2H20C20.5523 2 21 2.44772 21 3V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V3C3 2.44772 3.44772 2 4 2ZM7 12V14H9V12H7ZM7 16V18H9V16H7ZM11 12V14H13V12H11ZM11 16V18H13V16H11ZM15 12V18H17V12H15ZM7 6V10H17V6H7Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.496664, 0, 0, 5.496664, 184.322784, 220.532257)" style=""> <path d="M13 11V6H11V13H17V11H13ZM18.364 17.364L12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg>',
+  'explorer': '<svg class="task-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style=""> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg>',
+  'biblioteca': '<svg class="task-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style=""> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg>',
+  'calendario': '<svg class="task-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style=""> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg>',
+  'lembretes': '<svg class="task-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style=""> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg>',
+  'notas': '<svg class="task-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.395391, 0, 0, 5.395391, 185.086716, 233.021713)" style="visibility: hidden;"> <path d="M4 2H20C20.5523 2 21 2.44772 21 3V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V3C3 2.44772 3.44772 2 4 2ZM7 12V14H9V12H7ZM7 16V18H9V16H7ZM11 12V14H13V12H11ZM11 16V18H13V16H11ZM15 12V18H17V12H15ZM7 6V10H17V6H7Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.496664, 0, 0, 5.496664, 184.322784, 220.532257)" style=""> <path d="M13 11V6H11V13H17V11H13ZM18.364 17.364L12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg>',
+  'calculadora': '<svg class="task-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style="visibility: hidden;"> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.395391, 0, 0, 5.395391, 185.086716, 233.021713)" style=""> <path d="M4 2H20C20.5523 2 21 2.44772 21 3V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V3C3 2.44772 3.44772 2 4 2ZM7 12V14H9V12H7ZM7 16V18H9V16H7ZM11 12V14H13V12H11ZM11 16V18H13V16H11ZM15 12V18H17V12H15ZM7 6V10H17V6H7Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.496664, 0, 0, 5.496664, 184.322784, 220.532257)" style="visibility: hidden;"> <path d="M13 11V6H11V13H17V11H13ZM18.364 17.364L12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg>',
+  'chat': '<svg class="task-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"> <g transform="matrix(5.275641, 0, 0, 5.275641, 186.742966, 240.916779)" style="visibility: hidden;"> <path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.242951, 0, 0, 5.242951, 187.414108, 240.692688)" style="visibility: hidden;"> <path d="M9 13V16H15V13H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V13H9ZM11 11H13V14H11V11ZM7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V11H15V9H9V11H2V6C2 5.44772 2.44772 5 3 5H7ZM9 3V5H15V3H9Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.208451, 0, 0, 5.208451, 187.490692, 239.028778)" style="visibility: hidden;"> <path d="M17 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3ZM4 9V19H20V9H4ZM6 11H8V13H6V11ZM11 11H13V13H11V11ZM16 11H18V13H16V11Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.137635, 0, 0, 5.137635, 188.833801, 235.633682)" style=""> <path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.602148, 0, 0, 5.602148, 181.53186, 227.429031)" style="visibility: hidden;"> <path d="M3 8L9.00319 2H19.9978C20.5513 2 21 2.45531 21 2.9918V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5501 3 20.9932V8ZM10 3.5L4.5 9H10V3.5Z" style="fill: currentColor;"/> </g> <g transform="matrix(5.145468, 0, 0, 5.145468, 187.678268, 240.026688)" style="visibility: hidden;"> <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z" style="fill: currentColor;"/> </g> <path d="M 250.323 103.646 L 409.363 379.047 L 91.282 379.047 L 250.323 103.646 Z" style="fill: none; stroke: currentColor; stroke-width: 9px;"/> <path d="M 250.727 136.707 L 381.495 362.921 L 119.959 362.921 L 250.727 136.707 Z" style="fill: none; stroke: currentColor; stroke-width: 9;"/> </svg>',
+};
 var APP_LABELS = {
   dss: 'DSS CONTRACTS',
   recrutamento: 'DFF RECRUITMENT',
   esquadrao: 'DFF SQUAD',
   explorer: 'DB EXPLORER',
-  biblioteca: 'DELTA LIBRARY'
+  biblioteca: 'DELTA FILES',
+  calculadora: 'CALCULADORA',
+  calendario: 'CALENDÁRIO',
+  lembretes: 'LEMBRETES',
+  notas: 'ANOTAÇÕES',
+  chat: 'DELTA COMM',
+  dmail: 'DMAIL'
 };
 var openApps = []; // lista de IDs abertos
 
@@ -1581,6 +2010,7 @@ function openApp(id) {
   if (id === 'esquadrao') initSquadPanel();
   if (id === 'explorer')  resetExplorer();
   if (id === 'biblioteca') initBiblioteca();
+  initNewApp(id);
 
   showOnly(document.getElementById('panel-' + id));
 
@@ -1611,7 +2041,8 @@ function renderTaskbar() {
     var btn = document.createElement('div');
     btn.className = 'taskbar-app-btn';
     btn.dataset.id = id;
-    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" class="task-svg"><path d="M250.323 103.646L409.363 379.047L91.282 379.047Z" fill="none" stroke="currentColor" stroke-width="9"/><path d="M250.727 136.707L381.495 362.921L119.959 362.921Z" fill="none" stroke="currentColor" stroke-width="9" opacity=".5"/></svg><span class="task-label">' + APP_LABELS[id] + '</span>';
+    var iconSvg = APP_SVGS[id] || '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" class="task-svg"><path d="M250.323 103.646L409.363 379.047L91.282 379.047Z" fill="none" stroke="currentColor" stroke-width="9"/></svg>';
+    btn.innerHTML = iconSvg + '<span class="task-label">' + APP_LABELS[id] + '</span>';
     btn.onclick = function() { openApp(id); };
     container.appendChild(btn);
   });
@@ -1904,7 +2335,7 @@ function explorerModo(modo) {
       out.innerHTML = '<div class="terminal-box"><span class="line-dim">Nenhum recruta registrado.</span></div>';
       return;
     }
-    let html = `<div class="terminal-box"><div style="margin-bottom:8px;font-size:11px;color:var(--green-dim);letter-spacing:0.15em">📁 Database/DFF_Ids/ — ${state.recrutas.length} arquivo(s)</div>
+    let html = `<div class="terminal-box"><div style="margin-bottom:8px;font-size:11px;color:var(--green-dim);letter-spacing:0.15em"> Database/DFF_Ids/ — ${state.recrutas.length} arquivo(s)</div>
     <table><thead><tr><th>ID</th><th>STATUS</th><th>ALTERAR STATUS</th></tr></thead><tbody>`;
     state.recrutas.forEach((r, i) => {
       const badgeCls = { RESERVA:'badge-res', ACT:'badge-act', WIA:'badge-wia', KIA:'badge-kia', MIA:'badge-mia' };
@@ -1924,7 +2355,7 @@ function explorerModo(modo) {
     if (state.squads.length === 0) {
       out.innerHTML = '<div class="terminal-box"><span class="line-dim">Nenhum esquadrão formado.</span></div>'; return;
     }
-    let html = `<div class="terminal-box"><div style="margin-bottom:8px;font-size:11px;color:var(--green-dim);letter-spacing:0.15em">📁 Database/DFF_Squads/ — ${state.squads.length} arquivo(s)</div>`;
+    let html = `<div class="terminal-box"><div style="margin-bottom:8px;font-size:11px;color:var(--green-dim);letter-spacing:0.15em"> Database/DFF_Squads/ — ${state.squads.length} arquivo(s)</div>`;
     state.squads.forEach(sq => {
       html += `<div style="margin-bottom:12px;border-bottom:1px solid rgba(0,191,255,0.1);padding-bottom:8px">
         <div style="font-family:'VT323',monospace;font-size:17px;color:var(--green);margin-bottom:4px">OP: ${sq.nome} <span style="font-size:13px;color:var(--green-dim)">(${sq.id})</span></div>
@@ -1942,7 +2373,7 @@ function explorerModo(modo) {
     if (state.contratos.length === 0) {
       out.innerHTML = '<div class="terminal-box"><span class="line-dim">Nenhum contrato gerado.</span></div>'; return;
     }
-    let html = `<div class="terminal-box"><div style="margin-bottom:8px;font-size:11px;color:var(--green-dim);letter-spacing:0.15em">📁 Database/DSS_Contracts/ — ${state.contratos.length} arquivo(s)</div>`;
+    let html = `<div class="terminal-box"><div style="margin-bottom:8px;font-size:11px;color:var(--green-dim);letter-spacing:0.15em"> Database/DSS_Contracts/ — ${state.contratos.length} arquivo(s)</div>`;
     state.contratos.forEach(c => {
       const ativos = c.agentes.filter(a=>a.status==='ACT').length;
       html += `<div style="margin-bottom:12px;border-bottom:1px solid rgba(0,191,255,0.1);padding-bottom:8px">
@@ -1970,7 +2401,7 @@ function mudarStatusRecrutaDB(i, val) {
   updateStats();
 }
 
-// ===================== DELTA LIBRARY =====================
+// ===================== DELTA FILES =====================
 const BIBLIOTECA = [
   {
     id: 'GENESE-01',
@@ -3081,6 +3512,73 @@ function setVolume(v) {
   if (masterGain) masterGain.gain.setTargetAtTime(v / 100, audioCtx.currentTime, 0.05);
 }
 
+// ── HOVER & CLICK SOUNDS ─────────────────────────────────────
+function playHover() {
+  var ctx = audioCtx;
+  if (!ctx) { try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { return; } }
+  var t = ctx.currentTime;
+  var osc  = ctx.createOscillator();
+  var filt = ctx.createBiquadFilter();
+  var g    = ctx.createGain();
+  filt.type = 'bandpass';
+  filt.frequency.setValueAtTime(2200, t);
+  filt.Q.value = 1.2;
+  osc.connect(filt); filt.connect(g); g.connect(ctx.destination);
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(1100, t);
+  osc.frequency.exponentialRampToValueAtTime(600, t + 0.12);
+  g.gain.setValueAtTime(0.0, t);
+  g.gain.linearRampToValueAtTime(0.07, t + 0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.13);
+  osc.start(t); osc.stop(t + 0.14);
+}
+
+function playClick() {
+  var ctx = audioCtx;
+  if (!ctx) { try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { return; } }
+  var t = ctx.currentTime;
+  var osc  = ctx.createOscillator();
+  var osc2 = ctx.createOscillator();
+  var filt = ctx.createBiquadFilter();
+  var g    = ctx.createGain();
+  filt.type = 'bandpass';
+  filt.frequency.setValueAtTime(1800, t);
+  filt.Q.value = 1.0;
+  osc.connect(filt); osc2.connect(filt); filt.connect(g); g.connect(ctx.destination);
+  osc.type = 'sine'; osc2.type = 'sine';
+  osc.frequency.setValueAtTime(900, t);
+  osc.frequency.exponentialRampToValueAtTime(380, t + 0.18);
+  osc2.frequency.setValueAtTime(905, t);
+  osc2.frequency.exponentialRampToValueAtTime(383, t + 0.18);
+  g.gain.setValueAtTime(0.0, t);
+  g.gain.linearRampToValueAtTime(0.11, t + 0.012);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.2);
+  osc.start(t); osc.stop(t + 0.21);
+  osc2.start(t); osc2.stop(t + 0.21);
+}
+
+function initHoverSounds() {
+  var sel = 'button, .btn, .app-icon, .taskbar-app-btn, .sidebar-logo, .menu-item, .win-close, .id-chip, .tab';
+  document.querySelectorAll(sel).forEach(function(el) {
+    el.addEventListener('mouseenter', playHover, { passive: true });
+    el.addEventListener('mousedown',  playClick, { passive: true });
+  });
+  new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      m.addedNodes.forEach(function(node) {
+        if (node.nodeType !== 1) return;
+        var els = Array.from(node.querySelectorAll ? node.querySelectorAll(sel) : []);
+        if (node.matches && node.matches(sel)) els.push(node);
+        els.forEach(function(el) {
+          el.addEventListener('mouseenter', playHover, { passive: true });
+          el.addEventListener('mousedown',  playClick, { passive: true });
+        });
+      });
+    });
+  }).observe(document.body, { childList: true, subtree: true });
+}
+document.addEventListener('DOMContentLoaded', initHoverSounds);
+
 // Drone layer — deep bass pad
 function createDrone(freq, detune=0) {
   const osc = audioCtx.createOscillator();
@@ -3279,6 +3777,501 @@ function toggleMusic() {
     btn.style.textShadow = 'none';
     logHome('[BGM ] Score pausado.', 'inf');
   }
+}
+
+
+// ===================== CALCULADORA =====================
+var calcState = { expr:'', val:'0', prevOp:null, prevVal:null, newNum:true, mode:'deg', mem:0 };
+
+function calcSetMode(m) {
+  calcState.mode = m;
+  document.getElementById('cmode-deg').classList.toggle('active', m==='deg');
+  document.getElementById('cmode-rad').classList.toggle('active', m==='rad');
+}
+function calcConst(k) {
+  calcState.val = String(k==='pi' ? Math.PI : Math.E);
+  calcState.newNum = false; calcDisplay();
+}
+function calcMemStore() {
+  calcState.mem = parseFloat(calcState.val);
+  var ind = document.getElementById('calc-mem-indicator');
+  ind.textContent = 'M'; ind.style.opacity = '1';
+}
+function calcMemRecall() {
+  calcState.val = String(calcState.mem); calcState.newNum = false; calcDisplay();
+}
+function calcSci(fn) {
+  var x = parseFloat(calcState.val);
+  var toRad = calcState.mode === 'deg' ? Math.PI/180 : 1;
+  var r;
+  switch(fn) {
+    case 'sin':  r = Math.sin(x*toRad); break;
+    case 'cos':  r = Math.cos(x*toRad); break;
+    case 'tan':  r = Math.tan(x*toRad); break;
+    case 'asin': r = Math.asin(x)/toRad; break;
+    case 'acos': r = Math.acos(x)/toRad; break;
+    case 'atan': r = Math.atan(x)/toRad; break;
+    case 'log':  r = Math.log10(x); break;
+    case 'ln':   r = Math.log(x); break;
+    case 'sqrt': r = Math.sqrt(x); break;
+    case 'cbrt': r = Math.cbrt(x); break;
+    case 'pow2': r = x*x; break;
+    case 'pow3': r = x*x*x; break;
+    case 'inv':  r = 1/x; break;
+    case 'abs':  r = Math.abs(x); break;
+    case 'fact': var n=Math.round(x); r=1; for(var i=2;i<=n;i++) r*=i; break;
+    default: r = x;
+  }
+  calcState.expr = fn+'('+x+') =';
+  calcState.val = isNaN(r) ? 'ERR' : parseFloat(r.toFixed(10)).toString();
+  calcState.newNum = true; calcDisplay();
+}
+function calcDisplay() {
+  document.getElementById('calc-val').textContent  = calcState.val;
+  document.getElementById('calc-expr').textContent = calcState.expr || ' ';
+}
+function calcNum(n) {
+  if (calcState.newNum) { calcState.val = n; calcState.newNum = false; }
+  else { calcState.val = calcState.val === '0' ? n : calcState.val + n; }
+  calcDisplay();
+}
+function calcDot() {
+  if (calcState.newNum) { calcState.val = '0.'; calcState.newNum = false; }
+  else if (!calcState.val.includes('.')) calcState.val += '.';
+  calcDisplay();
+}
+function calcSign() { calcState.val = String(-parseFloat(calcState.val)); calcDisplay(); }
+function calcDel() {
+  if (calcState.val.length > 1) calcState.val = calcState.val.slice(0,-1);
+  else calcState.val = '0';
+  calcDisplay();
+}
+function calcClear() { calcState = { expr:'', val:'0', prevOp:null, prevVal:null, newNum:true }; calcDisplay(); }
+function calcOp(op) {
+  if (calcState.prevOp && !calcState.newNum) calcEquals(true);
+  calcState.prevVal = parseFloat(calcState.val);
+  calcState.prevOp  = op;
+  var opLabel = {'+':'+','-':'−','*':'×','/':'÷','%':'%'}[op] || op;
+  calcState.expr = calcState.val + ' ' + opLabel;
+  calcState.newNum = true;
+  calcDisplay();
+}
+function calcEquals(chain) {
+  if (!calcState.prevOp) return;
+  var a = calcState.prevVal, b = parseFloat(calcState.val), r;
+  var opLabel = {'+':'+','-':'−','*':'×','/':'÷','%':'%'}[calcState.prevOp] || calcState.prevOp;
+  calcState.expr = a + ' ' + opLabel + ' ' + b + ' =';
+  switch(calcState.prevOp) {
+    case '+': r = a + b; break; case '-': r = a - b; break;
+    case '*': r = a * b; break; case '/': r = b !== 0 ? a / b : 'ERR'; break;
+    case '%': r = a % b; break;
+  }
+  calcState.val = typeof r === 'number' ? parseFloat(r.toFixed(10)).toString() : r;
+  if (!chain) { calcState.prevOp = null; calcState.prevVal = null; }
+  else calcState.prevVal = parseFloat(calcState.val);
+  calcState.newNum = true;
+  calcDisplay();
+}
+document.addEventListener('keydown', function(e) {
+  var p = document.getElementById('panel-calculadora');
+  if (!p || p.style.display === 'none') return;
+  if (e.key >= '0' && e.key <= '9') calcNum(e.key);
+  else if (e.key === '.') calcDot();
+  else if (e.key === '+') calcOp('+');
+  else if (e.key === '-') calcOp('-');
+  else if (e.key === '*') calcOp('*');
+  else if (e.key === '/') { e.preventDefault(); calcOp('/'); }
+  else if (e.key === '%') calcOp('%');
+  else if (e.key === 'Enter' || e.key === '=') calcEquals();
+  else if (e.key === 'Backspace') calcDel();
+  else if (e.key === 'Escape') calcClear();
+});
+
+// ===================== CALENDÁRIO =====================
+var calState = { year: new Date().getFullYear(), month: new Date().getMonth(), selectedDate: null, events: {} };
+var CAL_DOW = ['DOM','SEG','TER','QUA','QUI','SEX','SAB'];
+var CAL_MONTHS = ['JANEIRO','FEVEREIRO','MARÇO','ABRIL','MAIO','JUNHO','JULHO','AGOSTO','SETEMBRO','OUTUBRO','NOVEMBRO','DEZEMBRO'];
+
+function calRender() {
+  var y = calState.year, m = calState.month;
+  document.getElementById('cal-month-label').textContent = CAL_MONTHS[m] + ' ' + y;
+  var grid = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+  CAL_DOW.forEach(function(d) { grid.innerHTML += '<div class="cal-dow">' + d + '</div>'; });
+  var first = new Date(y, m, 1).getDay();
+  var days  = new Date(y, m+1, 0).getDate();
+  var today = new Date();
+  // Dias do mês anterior
+  var prevDays = new Date(y, m, 0).getDate();
+  for (var i = first - 1; i >= 0; i--) {
+    grid.innerHTML += '<div class="cal-day other-month">' + (prevDays - i) + '</div>';
+  }
+  for (var d = 1; d <= days; d++) {
+    var dateKey = y + '-' + String(m+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+    var cls = 'cal-day';
+    if (d === today.getDate() && m === today.getMonth() && y === today.getFullYear()) cls += ' today';
+    if (calState.selectedDate === dateKey) cls += ' selected';
+    if (calState.events[dateKey] && calState.events[dateKey].length) cls += ' has-event';
+    grid.innerHTML += '<div class="' + cls + '" onclick="calSelectDate(\'' + dateKey + '\')">' + d + '</div>';
+  }
+  calRenderEvents();
+}
+
+function calNav(dir) { calState.month += dir; if (calState.month > 11) { calState.month=0; calState.year++; } else if (calState.month < 0) { calState.month=11; calState.year--; } calRender(); }
+
+function calSelectDate(key) {
+  calState.selectedDate = key;
+  var parts = key.split('-');
+  document.getElementById('cal-sel-date').textContent = parts[2] + '/' + parts[1] + '/' + parts[0];
+  calRender();
+}
+
+function calAddEvent() {
+  var name = document.getElementById('cal-evt-name').value.trim();
+  var time = document.getElementById('cal-evt-time').value;
+  if (!name || !calState.selectedDate) { notify('SELECIONE UM DIA E INFORME O NOME'); return; }
+  if (!calState.events[calState.selectedDate]) calState.events[calState.selectedDate] = [];
+  calState.events[calState.selectedDate].push({ name: name, time: time || '--:--', alert: false });
+  document.getElementById('cal-evt-name').value = '';
+  document.getElementById('cal-evt-time').value = '';
+  calRender();
+  logHome('[CAL ] Evento "' + name + '" adicionado.', 'ok');
+}
+
+function calRenderEvents() {
+  var list = document.getElementById('cal-events-list');
+  if (!calState.selectedDate) { list.innerHTML = '<div style="color:rgba(0,191,255,0.25);font-size:12px;padding:8px 0;letter-spacing:0.15em">SELECIONE UM DIA</div>'; return; }
+  var evts = calState.events[calState.selectedDate] || [];
+  if (!evts.length) { list.innerHTML = '<div style="color:rgba(0,191,255,0.25);font-size:12px;padding:8px 0;letter-spacing:0.15em">NENHUM EVENTO</div>'; return; }
+  list.innerHTML = '';
+  evts.forEach(function(ev, i) {
+    var el = document.createElement('div'); el.className = 'cal-event-item';
+    el.innerHTML = '<div class="cal-event-dot' + (ev.alert ? ' alert' : '') + '"></div>'
+      + '<div class="cal-event-time">' + ev.time + '</div>'
+      + '<div class="cal-event-name">' + ev.name + '</div>'
+      + '<div class="cal-event-del" onclick="calDelEvent(' + i + ')">&#x2715;</div>';
+    list.appendChild(el);
+  });
+}
+
+function calDelEvent(i) {
+  calState.events[calState.selectedDate].splice(i, 1);
+  calRender();
+}
+
+// Alerta de eventos
+setInterval(function() {
+  var now = new Date();
+  var key = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
+  var evts = calState.events[key] || [];
+  var hm = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+  evts.forEach(function(ev) { if (ev.time === hm && !ev._alerted) { ev._alerted = true; notify('⏰ ALERTA: ' + ev.name, 5000); } });
+}, 30000);
+
+// ===================== LEMBRETES =====================
+var remindState = { items: [], filter: 'all' };
+
+function remindAdd() {
+  var inp = document.getElementById('remind-input');
+  var txt = inp.value.trim();
+  if (!txt) return;
+  remindState.items.push({ id: Date.now(), text: txt, done: false });
+  inp.value = '';
+  remindRender();
+  logHome('[TASK] Lembrete adicionado: ' + txt, 'ok');
+}
+
+function remindToggle(id) {
+  var item = remindState.items.find(function(i) { return i.id === id; });
+  if (item) { item.done = !item.done; remindRender(); }
+}
+
+function remindDel(id) {
+  remindState.items = remindState.items.filter(function(i) { return i.id !== id; });
+  remindRender();
+}
+
+function remindFilter(f) {
+  remindState.filter = f;
+  document.querySelectorAll('.remind-filter').forEach(function(el) { el.classList.remove('active'); });
+  document.getElementById('rf-' + f).classList.add('active');
+  remindRender();
+}
+
+function remindRender() {
+  var list = document.getElementById('remind-list');
+  if (!list) return;
+  var items = remindState.items.filter(function(i) {
+    if (remindState.filter === 'active') return !i.done;
+    if (remindState.filter === 'done')   return  i.done;
+    return true;
+  });
+  if (!items.length) { list.innerHTML = '<div style="color:rgba(0,191,255,0.25);font-size:12px;padding:12px 0;letter-spacing:0.15em">NENHUM ITEM</div>'; return; }
+  list.innerHTML = '';
+  items.forEach(function(item) {
+    var el = document.createElement('div');
+    el.className = 'remind-item' + (item.done ? ' done' : '');
+    el.innerHTML = '<div class="remind-check' + (item.done ? ' checked' : '') + '" onclick="remindToggle(' + item.id + ')"></div>'
+      + '<div class="remind-text">' + item.text + '</div>'
+      + '<div class="remind-del" onclick="remindDel(' + item.id + ')">&#x2715;</div>';
+    list.appendChild(el);
+  });
+}
+
+// ===================== ANOTAÇÕES =====================
+var notesState = { notes: [], activeId: null };
+
+function notesNew() {
+  var note = { id: Date.now(), title: 'NOVA NOTA', body: '', date: new Date().toLocaleDateString('pt-BR') };
+  notesState.notes.unshift(note);
+  notesState.activeId = note.id;
+  notesRenderList();
+  notesOpenEditor(note);
+}
+
+function notesRenderList() {
+  var list = document.getElementById('notes-list');
+  if (!list) return;
+  list.innerHTML = '';
+  notesState.notes.forEach(function(note) {
+    var el = document.createElement('div');
+    el.className = 'note-item' + (note.id === notesState.activeId ? ' active' : '');
+    el.innerHTML = '<div class="note-item-title">' + (note.title || 'SEM TÍTULO') + '</div><div class="note-item-date">' + note.date + '</div>';
+    el.onclick = function() { notesState.activeId = note.id; notesRenderList(); notesOpenEditor(note); };
+    list.appendChild(el);
+  });
+}
+
+function notesOpenEditor(note) {
+  var empty = document.getElementById('notes-empty');
+  var title = document.getElementById('notes-title');
+  var body  = document.getElementById('notes-body');
+  if (empty) empty.style.display = 'none';
+  if (title) { title.style.display = ''; title.value = note.title; }
+  if (body)  { body.style.display  = ''; body.value  = note.body;  }
+}
+
+function notesSave() {
+  var note = notesState.notes.find(function(n) { return n.id === notesState.activeId; });
+  if (!note) return;
+  var title = document.getElementById('notes-title');
+  var body  = document.getElementById('notes-body');
+  if (title) note.title = title.value || 'SEM TÍTULO';
+  if (body)  note.body  = body.value;
+  note.date = new Date().toLocaleDateString('pt-BR');
+  notesRenderList();
+}
+
+// ===================== CHAT =====================
+var chatState = {
+  contacts: [
+    { id:1, name:'AGENTE ZERO',    type:'direct', status:'ONLINE',  messages:[], isGroup:false },
+    { id:2, name:'DELTA HQ',       type:'group',  status:'SEGURO',  messages:[], isGroup:true,  members:['ZERO','SIGMA','OMEGA'] },
+    { id:3, name:'SIGMA-7',        type:'direct', status:'OFFLINE', messages:[], isGroup:false }
+  ],
+  activeId: null
+};
+
+function chatRenderContacts() {
+  var list = document.getElementById('chat-contact-list');
+  if (!list) return;
+  list.innerHTML = '';
+  chatState.contacts.forEach(function(ct) {
+    var el = document.createElement('div');
+    el.className = 'chat-contact' + (ct.id === chatState.activeId ? ' active' : '');
+    var lastMsg = ct.messages.length ? ct.messages[ct.messages.length-1].text : '...';
+    if (lastMsg.length > 22) lastMsg = lastMsg.slice(0,22) + '...';
+    el.innerHTML = '<div class="chat-avatar' + (ct.isGroup ? ' group' : '') + '">' + ct.name[0] + '</div>'
+      + '<div style="flex:1;min-width:0"><div class="chat-contact-name">' + ct.name + '</div>'
+      + '<div class="chat-contact-last">' + lastMsg + '</div></div>';
+    el.onclick = function() { chatState.activeId = ct.id; chatRenderContacts(); chatOpenConversation(ct); };
+    list.appendChild(el);
+  });
+}
+
+function chatOpenConversation(ct) {
+  document.getElementById('chat-empty').style.display = 'none';
+  var active = document.getElementById('chat-active');
+  active.style.display = 'flex';
+  document.getElementById('chat-active-name').textContent = ct.name;
+  document.getElementById('chat-active-status').textContent = ct.isGroup ? ct.members.join(' · ') : ct.status + ' — CANAL SEGURO';
+  chatRenderMessages(ct);
+}
+
+function chatRenderMessages(ct) {
+  var box = document.getElementById('chat-messages');
+  box.innerHTML = '';
+  ct.messages.forEach(function(msg) {
+    var el = document.createElement('div');
+    el.className = 'chat-msg ' + (msg.from === 'me' ? 'sent' : 'recv');
+    var sender = msg.from !== 'me' && ct.isGroup ? '<div class="chat-msg-sender">' + msg.from + '</div>' : '';
+    el.innerHTML = sender + '<div class="chat-bubble">' + msg.text + '</div><div class="chat-msg-meta">' + msg.time + '</div>';
+    box.appendChild(el);
+  });
+  box.scrollTop = box.scrollHeight;
+}
+
+function chatSend() {
+  var inp = document.getElementById('chat-input');
+  var txt = inp.value.trim();
+  if (!txt || !chatState.activeId) return;
+  var ct = chatState.contacts.find(function(c) { return c.id === chatState.activeId; });
+  if (!ct) return;
+  var now = new Date(); var hm = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+  ct.messages.push({ from:'me', text: txt, time: hm });
+  inp.value = '';
+  chatRenderMessages(ct);
+  chatRenderContacts();
+  // Auto-resposta após 1.2s
+  setTimeout(function() {
+    var respostas = ['RECEBIDO.','CONFIRMADO — AGUARDANDO INSTRUÇÕES.','CÓPIA. MANTENHA CANAL SEGURO.','ROGER THAT.','PROTOCOLO ATIVO.','DADOS RECEBIDOS. PROCESSANDO...'];
+    var r = respostas[Math.floor(Math.random()*respostas.length)];
+    var sender = ct.isGroup ? ct.members[Math.floor(Math.random()*ct.members.length)] : ct.name;
+    var t2 = new Date(); var hm2 = String(t2.getHours()).padStart(2,'0') + ':' + String(t2.getMinutes()).padStart(2,'0');
+    ct.messages.push({ from: sender, text: r, time: hm2 });
+    if (chatState.activeId === ct.id) chatRenderMessages(ct);
+    chatRenderContacts();
+  }, 1200 + Math.random()*800);
+}
+
+function chatNewContact() {
+  var inp = document.getElementById('chat-new-name');
+  var name = inp.value.trim().toUpperCase();
+  if (!name) return;
+  var isGroup = name.includes('GRUPO') || name.includes('TEAM') || name.includes('HQ') || name.includes('SQUAD');
+  chatState.contacts.push({ id: Date.now(), name: name, type: isGroup ? 'group' : 'direct', status:'ONLINE', messages:[], isGroup: isGroup, members: isGroup ? ['VOCÊ'] : [] });
+  inp.value = '';
+  chatRenderContacts();
+  notify('CONTATO ' + name + ' ADICIONADO');
+}
+
+// Init dos novos apps — chamado dentro do openApp original
+function initNewApp(id) {
+  if (id === 'calendario') { setTimeout(function() { calRender(); if (!calState.selectedDate) { var t=new Date(); calSelectDate(t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0')); }}, 10); }
+  if (id === 'lembretes')  { setTimeout(remindRender, 10); }
+  if (id === 'notas')      { setTimeout(notesRenderList, 10); }
+  if (id === 'chat')       { setTimeout(chatRenderContacts, 10); }
+  if (id === 'dmail')      { setTimeout(initDmail, 10); }
+}
+
+
+// ===================== DMAIL =====================
+var mailState = {
+  folder: 'inbox',
+  activeId: null,
+  emails: [
+    { id:1, folder:'inbox', unread:true,  starred:false, from:'COMANDO-CENTRAL', fromAddr:'cmd@delta.net',    to:'DELTA_ARCHITECT', subj:'BRIEFING OP. NIGHTFALL', time:'08:14', body:'OPERADOR,\n\nA operação NIGHTFALL foi autorizada pelo Conselho Delta.\n\nResumo:\n- Objetivo: neutralizar infiltração na zona 7\n- Prazo: 72 horas\n- Recursos alocados: Esquadrão SIGMA + suporte aéreo\n\nAguardamos confirmação de recebimento.\n\n// COMANDO-CENTRAL' },
+    { id:2, folder:'inbox', unread:true,  starred:false, from:'AGENTE ZERO',     fromAddr:'zero@delta.net',   to:'DELTA_ARCHITECT', subj:'RELATÓRIO DE CAMPO', time:'06:50', body:'ARQUITETO,\n\nRelatório do setor norte:\n\nMovimentação suspeita detectada no quadrante 4-C. Três indivíduos não identificados foram avistados próximos ao posto de comando avançado.\n\nSolicito autorização para aproximação e identificação.\n\nAguardo ordens.\n— ZERO' },
+    { id:3, folder:'inbox', unread:true,  starred:false, from:'SYS-MONITOR',     fromAddr:'sys@delta.net',    to:'DELTA_ARCHITECT', subj:'[ALERTA] ANOMALIA DETECTADA', time:'03:22', body:'[SISTEMA AUTOMATIZADO]\n\nAnomalia de rede detectada:\n\nOrigem: IP 192.168.7.44\nTipo: Tentativa de acesso não autorizado\nNível: MÉDIO\nStatus: BLOQUEADO\n\nLog completo disponível no DB Explorer.\n\n// SYS-MONITOR v4.2' },
+    { id:4, folder:'inbox', unread:false, starred:true,  from:'SIGMA-7',         fromAddr:'sigma7@delta.net', to:'DELTA_ARCHITECT', subj:'SOLICITAÇÃO DE REFORÇOS', time:'ONTEM', body:'ARQUITETO,\n\nA situação no perímetro sul está se agravando. Precisamos de reforços urgentes.\n\nSugiro ativar o protocolo DELTA-3 e mobilizar os recrutas disponíveis.\n\nContamos com sua decisão.\n— SIGMA-7' },
+    { id:5, folder:'sent',  unread:false, starred:false, from:'DELTA_ARCHITECT', fromAddr:'arch@delta.net',   to:'COMANDO-CENTRAL', subj:'RE: CONFIRMAÇÃO OP. NIGHTFALL', time:'08:30', body:'CONFIRMADO.\n\nRecebimento do briefing confirmado. Equipe será mobilizada nas próximas 2 horas.\n\n— DELTA_ARCHITECT' },
+  ]
+};
+
+function mailFolder(f) {
+  mailState.folder = f;
+  mailState.activeId = null;
+  document.getElementById('mail-reader').classList.remove('open');
+  document.querySelectorAll('.mail-folder').forEach(function(el) { el.classList.remove('active'); });
+  var el = document.getElementById('mf-' + f);
+  if (el) el.classList.add('active');
+  var titles = { inbox:'ENTRADA', sent:'ENVIADOS', starred:'MARCADOS', trash:'LIXEIRA' };
+  document.getElementById('mail-folder-title').textContent = titles[f] || f.toUpperCase();
+  mailRenderList();
+}
+
+function mailRenderList() {
+  var list = document.getElementById('mail-list');
+  if (!list) return;
+  var emails = mailState.emails.filter(function(e) {
+    if (mailState.folder === 'starred') return e.starred && e.folder !== 'trash';
+    return e.folder === mailState.folder;
+  });
+  document.getElementById('mail-count').textContent = emails.length + ' MENSAGENS';
+  if (!emails.length) { list.innerHTML = '<div style="padding:20px;color:rgba(0,191,255,0.25);font-size:12px;letter-spacing:0.2em">NENHUMA MENSAGEM</div>'; return; }
+  list.innerHTML = '';
+  emails.forEach(function(email) {
+    var el = document.createElement('div');
+    el.className = 'mail-item' + (email.unread ? ' unread' : '') + (email.id === mailState.activeId ? ' active' : '');
+    var initial = (email.folder === 'sent' ? email.to : email.from)[0];
+    el.innerHTML = '<div class="mail-item-avatar">' + initial + '</div>'
+      + '<div class="mail-item-body">'
+      + '<div class="mail-item-sender">' + (email.folder === 'sent' ? 'PARA: ' + email.to : email.from) + '</div>'
+      + '<div class="mail-item-subj">' + (email.starred ? '&#x2605; ' : '') + email.subj + '</div>'
+      + '<div class="mail-item-prev">' + email.body.replace(/\n/g,' ').substring(0, 60) + '...</div>'
+      + '</div>'
+      + '<div class="mail-item-time">' + email.time + '</div>';
+    el.onclick = function() { mailOpen(email.id); };
+    list.appendChild(el);
+  });
+  // Atualiza badge
+  var unread = mailState.emails.filter(function(e) { return e.unread && e.folder === 'inbox'; }).length;
+  var badge = document.getElementById('mb-inbox');
+  if (badge) { badge.textContent = unread; badge.style.display = unread ? '' : 'none'; }
+}
+
+function mailOpen(id) {
+  var email = mailState.emails.find(function(e) { return e.id === id; });
+  if (!email) return;
+  email.unread = false;
+  mailState.activeId = id;
+  var reader = document.getElementById('mail-reader');
+  reader.classList.add('open');
+  document.getElementById('mr-subj').textContent = email.subj;
+  document.getElementById('mr-meta').innerHTML =
+    'DE: ' + email.from + ' &lt;' + email.fromAddr + '&gt;<br>'
+    + 'PARA: ' + email.to + '<br>'
+    + 'HORÁRIO: ' + email.time
+    + (email.starred ? '<br><span style="color:var(--amber)">&#x2605; MARCADO</span>' : '');
+  document.getElementById('mr-body').textContent = email.body;
+  mailRenderList();
+}
+
+function mailReply() {
+  var email = mailState.emails.find(function(e) { return e.id === mailState.activeId; });
+  if (!email) return;
+  mailOpenCompose();
+  document.getElementById('mc-to').value = email.fromAddr;
+  document.getElementById('mc-subj').value = 'RE: ' + email.subj;
+  document.getElementById('mc-body').value = '\n\n— Em resposta a: ' + email.from + '\n' + email.body.split('\n').map(function(l){ return '> ' + l; }).join('\n');
+}
+
+function mailStar() {
+  var email = mailState.emails.find(function(e) { return e.id === mailState.activeId; });
+  if (!email) return;
+  email.starred = !email.starred;
+  mailOpen(mailState.activeId);
+}
+
+function mailDelete() {
+  var email = mailState.emails.find(function(e) { return e.id === mailState.activeId; });
+  if (!email) return;
+  if (email.folder === 'trash') { mailState.emails = mailState.emails.filter(function(e) { return e.id !== email.id; }); }
+  else { email.folder = 'trash'; email.unread = false; }
+  mailState.activeId = null;
+  document.getElementById('mail-reader').classList.remove('open');
+  mailRenderList();
+}
+
+function mailOpenCompose() { document.getElementById('mail-compose').classList.add('open'); document.getElementById('mc-to').focus(); }
+function mailCloseCompose() {
+  document.getElementById('mail-compose').classList.remove('open');
+  ['mc-to','mc-cc','mc-subj','mc-body'].forEach(function(id) { var el = document.getElementById(id); if(el) el.value = ''; });
+}
+
+function mailSend() {
+  var to   = document.getElementById('mc-to').value.trim();
+  var subj = document.getElementById('mc-subj').value.trim();
+  var body = document.getElementById('mc-body').value.trim();
+  if (!to || !subj) { notify('PREENCHA DESTINATÁRIO E ASSUNTO'); return; }
+  mailState.emails.push({ id: Date.now(), folder:'sent', unread:false, starred:false, from:'DELTA_ARCHITECT', fromAddr:'arch@delta.net', to: to.toUpperCase(), subj: subj, time: (function(){ var n=new Date(); return String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0'); })(), body: body });
+  mailCloseCompose();
+  notify('MENSAGEM ENVIADA — CRIPTOGRAFIA ATIVA');
+  logHome('[MAIL] Email enviado para ' + to, 'ok');
+}
+
+function initDmail() {
+  mailRenderList();
 }
 
 </script>
