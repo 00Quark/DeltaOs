@@ -1,5 +1,7 @@
 # 🖥️ DtOS (Delta Operating System)
 
+[![Acessar DtOS](https://img.shields.io/badge/Acessar%20Sistema-DtOS_Live-00bfff?style=for-the-badge&logo=vercel&logoColor=white)](https://delta-os-site.vercel.app/) 
+
 > *“O frio conserva. O frio protege. O frio é eterno.” — Protocolo ColdWall*
 
 O **DtOS (v16.2)** é a interface de terminal legado da **Delta Corporation**. Desenvolvido como uma aplicação web de página única (Single-Page Application), ele simula um sistema operacional corporativo e militar imersivo, focado na gestão de ativos, recrutamento e banco de dados confidencial.
@@ -32,3 +34,19 @@ O projeto foi desenvolvido de forma *Vanilla*, sem dependências externas pesada
 * **Lógica do Sistema:** JavaScript puro (ES6) manipulando o estado do DOM e a navegação entre os painéis (módulos).
 * **Áudio:** Implementação nativa da `Web Audio API` para osciladores, filtros biquadrados e controle de ganho dinâmico.
 * **Tipografia:** Fontes importadas do Google Fonts (`Share Tech Mono` para dados e `VT323` para títulos).
+
+---
+
+## ⚙️ Acesso e Execução
+
+Você pode acessar o sistema diretamente pelo navegador através do link oficial hospedado na Vercel, ou rodar localmente na sua máquina.
+
+### 🌐 Acesso Direto (Live)
+Clique no botão no topo da página ou acesse: **[delta-os-site.vercel.app](https://delta-os-site.vercel.app/)**
+
+### 🖥️ Rodando Localmente
+Caso queira testar o código na sua máquina, não é necessária nenhuma instalação complexa de servidores.
+
+1. Clone este repositório:
+   ```bash
+   git clone [https://github.com/00Quark/DeltaOs.git](https://github.com/00Quark/DeltaOs.git)
